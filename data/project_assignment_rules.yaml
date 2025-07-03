@@ -1,0 +1,22 @@
+rules:
+  - project_name: "Projeto Jogo Alpha"
+    keywords:
+      - "game"
+      - "jogo"
+      - "unity"
+      - "unreal"
+      - "dev"
+  - project_name: "Documentacao do Jogo"
+    keywords:
+      - "docs"
+      - "documentation"
+      - "wiki"
+      - "manual"
+  - project_name: "Ferramentas de Desenvolvimento"
+    keywords:
+      - "tools"
+      - "util"
+      - "scripts"
+      - "automatizacao"
+      - "build"
+  # Adicione mais regras conforme necessário, alinhando com os nomes dos projetos do seu CSV
