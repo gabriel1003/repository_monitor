@@ -1,4 +1,4 @@
-# test_from_gevu/src/models/model.py
+
 
 import sqlite3
 from typing import Optional, Dict, Any, List

@@ -3,11 +3,10 @@ import os
 import logging
 from typing import Optional, List, Dict, Any
 
-# ATENÇÃO: Caminhos dos imports e uso das instâncias dos modelos foram atualizados
 from src.models.model import project_model, repository_model
 from src.services.github_api import get_org_repos, extract_repo_info
 from src.services.project_importer import import_projects_from_csv, import_projects_from_json
-# Novo import para o carregador de regras
+
 from src.services.rule_loader import load_assignment_rules_from_yaml
 from src.config.config import PROJECTS_CSV_PATH, PROJECTS_JSON_PATH, \
     DEFAULT_PROJECT_NAME, setup_logging
@@ -60,7 +59,6 @@ def main():
     project_model.create_table()
     repository_model.create_table()
 
-    # 1. Carregar regras de atribuição usando o serviço dedicado
     logger.info("\nCarregando regras de atribuição de projetos...")
     global assignment_rules
     assignment_rules = load_assignment_rules_from_yaml()
@@ -70,8 +68,7 @@ def main():
     if not assignment_rules:  # Se retornar uma lista vazia, mas sem erro fatal
         logger.warning(
             "O arquivo de regras de atribuição foi carregado, mas não contém nenhuma regra. Repositórios serão associados ao projeto padrão.")
-
-    # 2. Cadastrar/Importar projetos e obter o nome da organização
+    
     logger.info("\nImportando projetos e nome da organização...")
     github_organization_name = None
     if os.path.exists(PROJECTS_CSV_PATH):
@@ -90,8 +87,7 @@ def main():
     else:
         logger.info(f"Organização GitHub a ser monitorada: {github_organization_name}")
         project_model.insert(DEFAULT_PROJECT_NAME, "Repositórios que não foram associados a um projeto específico.")
-
-    # 3. Obter repositórios do GitHub para a organização carregada
+    
     logger.info(f"\nColetando repositórios do GitHub para a organização '{github_organization_name}'...")
     github_repos = get_org_repos(github_organization_name)
 
@@ -100,8 +96,7 @@ def main():
         return
 
     logger.info(f"Encontrados {len(github_repos)} repositórios.")
-
-    # 4. Processar e armazenar repositórios
+    
     logger.info("\nProcessando e armazenando repositórios...")
     for repo_json in github_repos:
         repo_data = extract_repo_info(repo_json)
@@ -116,7 +111,6 @@ def main():
                 f"Repositório '{repo_data['nome']}' não pôde ser associado a nenhum projeto (nem mesmo o padrão). Isso é um erro inesperado e indica um problema na lógica de atribuição ou no projeto padrão.")
 
     logger.info("\nMonitoramento de repositórios concluído.")
-
 
 if __name__ == "__main__":
     setup_logging()

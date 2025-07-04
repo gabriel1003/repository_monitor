@@ -1,4 +1,4 @@
-# test_from_gevu/src/services/github_api.py
+
 import requests
 from src.config.config import GITHUB_TOKEN
 import time
