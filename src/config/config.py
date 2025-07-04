@@ -1,4 +1,4 @@
-# test_from_gevu/src/config/config.py
+# repository_monitor/src/config/config.py
 
 import os
 from dotenv import load_dotenv
@@ -10,7 +10,7 @@ project_root_dir = os.path.join(current_dir, '..', '..', '..')
 load_dotenv(os.path.join(project_root_dir, '.env'))
 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-DATABASE_NAME = os.path.join(project_root_dir, "repos_monitor.db")
+DATABASE_NAME = os.path.join(project_root_dir, "data", "repos_monitor.db")
 PROJECTS_CSV_PATH = os.path.join(project_root_dir, "data", "projetos.csv")
 PROJECTS_JSON_PATH = os.path.join(project_root_dir, "data", "projetos.json")
 
