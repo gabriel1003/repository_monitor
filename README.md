@@ -39,6 +39,10 @@ repository_monitor/
     ├── models/
     │   ├── __init__.py
     │   └── model.py     # Camada de modelo de dados (interação com SQLite)
+    repositories/
+    __init__.py
+    project_repository.py     # camada do CRUD para a tabela Projetos.
+    github_repository     # camada do CRUD para a tabela Repositorios.
     └── services/
         ├── __init__.py
         ├── github_api.py # Interação com a API do GitHub
@@ -114,7 +118,7 @@ Crie a pasta data/ dentro do diretório repository_monitor/ se ela ainda não ex
 
 ```
 organizacao_github,nome,descricao
-SavanDevs,Projeto Jogo Alpha,Repositórios relacionados ao desenvolvimento do jogo Alpha,Documentacao do Jogo,Repositórios para documentação e wikis do jogo,Ferramentas de Desenvolvimento,Repositórios para ferramentas e utilitários internos do jogo
+OrganisacaoExemplo,Projeto <Seu Projeto> Alpha,Repositórios relacionados ao desenvolvimento do <Seu Projeto> Alpha,Documentacao do <Seu Projeto>,Repositórios para documentação e wikis do <Seu Projeto>,Ferramentas de Desenvolvimento,Repositórios para ferramentas e utilitários internos do <Seu Projeto>
 ```
 
 (Nota: A organizacao_github só precisa estar na primeira linha do CSV. Para JSON, no primeiro objeto da lista.)
@@ -125,14 +129,14 @@ SavanDevs,Projeto Jogo Alpha,Repositórios relacionados ao desenvolvimento do jo
 
 rules:
 
-* project_name: "Projeto Jogo Alpha"
+* project_name: "Projeto <Seu Projeto> Alpha"
     keywords:
-  * "game"
-  * "jogo"
+  * "tipo do projeto"
+  * "Seu Projeto"
   * "unity"
   * "unreal"
   * "dev"
-* project_name: "Documentacao do Jogo"
+* project_name: "Documentacao do Projeto"
     keywords:
   * "docs"
   * "documentation"

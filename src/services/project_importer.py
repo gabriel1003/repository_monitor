@@ -1,12 +1,10 @@
-# test_from_gevu/src/services/project_importer.py
 import csv
 import json
 import os
 import logging
 from typing import Optional
 
-# ATENÇÃO: Caminho do import do models.py e config.py foram atualizados
-from src.models.model import project_model  # Usando a instância do modelo
+from src.repositories.project_repository import project_repository
 from src.config.config import PROJECTS_CSV_PATH, PROJECTS_JSON_PATH
 
 logger = logging.getLogger(__name__)
@@ -38,7 +36,8 @@ def import_projects_from_csv() -> Optional[str]:
                     logger.warning(f"Linha ignorada no CSV por falta de 'nome': {row}")
 
             for project in projects_to_insert:
-                project_model.insert(project["nome"], project["descricao"])  # Usa o método do objeto modelo
+                project_repository.insert_project(project["nome"],
+                                                  project["descricao"])  # Chama o método do repositório
 
     except Exception as e:
         logger.error(f"Erro ao importar projetos do CSV: {e}")
@@ -66,7 +65,7 @@ def import_projects_from_json() -> Optional[str]:
                     nome = item.get("nome")
                     descricao = item.get("descricao")
                     if nome:
-                        project_model.insert(nome, descricao)  # Usa o método do objeto modelo
+                        project_repository.insert_project(nome, descricao)  # Chama o método do repositório
                     else:
                         logger.warning(f"Item ignorado no JSON por falta de 'nome': {item}")
             else:

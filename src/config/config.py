@@ -24,7 +24,6 @@ DEFAULT_PROJECT_NAME = "Projeto Diversos"
 if not GITHUB_TOKEN:
     raise ValueError("GITHUB_TOKEN não configurado nas variáveis de ambiente. Verifique o arquivo .env.")
 
-# Configuração inicial do logging
 def setup_logging():
     logging.basicConfig(
         level=LOG_LEVEL,
